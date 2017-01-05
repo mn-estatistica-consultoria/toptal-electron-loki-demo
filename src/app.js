@@ -6,9 +6,9 @@
 /**
  * Main process
  */
-var app = require('app'),
-    ipc = require('ipc'),
-    BrowserWindow = require('browser-window');
+var app = require('electron').app,
+    ipc = require('electron').ipc,
+    BrowserWindow = require('electron').BrowserWindow;
 
 var mainWindow = null,
     insertWindow = null;
@@ -20,7 +20,7 @@ function createInsertWindow() {
         show: false
     });
 
-    insertWindow.loadUrl('file://' + __dirname + '/windows/insert/insert.html');
+    insertWindow.loadURL('file://' + __dirname + '/windows/insert/insert.html');
 
     insertWindow.on('closed',function() {
         insertWindow = null;
@@ -33,7 +33,7 @@ app.on('ready', function() {
         height: 768
     });
 
-    mainWindow.loadUrl('file://' + __dirname + '/windows/main/main.html');
+    mainWindow.loadURL('file://' + __dirname + '/windows/main/main.html');
     mainWindow.openDevTools();
 
     ipc.on('toggle-insert-view', function() {
